@@ -1,0 +1,304 @@
+/***********
+CSS RESET
+***********/
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+* {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* screen reader only to visually hide content for sighted users (V.I.) only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap; /* added line */
+  border: 0;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+}
+
+button {
+  cursor: pointer;
+}
+
+/**********
+Typography
+**********/
+#item-1 {
+  font-size: 2.7rem;
+  font-weight: 800;
+  line-height: 24px;
+  letter-spacing: -0.045em;
+}
+
+#item-2 {
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+/**********
+Layout
+**********/
+header {
+  position: relative;
+  min-height: 35vh;
+  display: flex;
+  align-items: center;
+  background-color: hsla(0, 0%, 5%, 1);
+}
+
+nav ul {
+  display: flex;
+  gap: 2em;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+nav li {
+  list-style: none;
+  z-index: 2;
+}
+
+nav a {
+  text-shadow: 0 0 5px #000;
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.bg-image {
+  background-image: url("/images/header-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 25% 20%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0.6;
+}
+
+.container {
+  max-width: 550px;
+  width: 90%;
+  min-width: 17em;
+  margin: 0 auto;
+}
+
+.search-wrapper {
+  font-size: 0.875rem;
+  display: flex;
+  background: #fff;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  margin-top: -1em;
+}
+
+.search {
+  z-index: 3;
+  color: #6b7280;
+  flex-grow: 1;
+  border: none;
+  text-indent: 5px;
+}
+
+.search:focus {
+  outline: none;
+}
+
+label {
+  background: #fff;
+  padding: 11px 0;
+  z-index: 3;
+  border-radius: 6px 0 0 6px;
+}
+
+.search-icon {
+  place-self: center;
+  cursor: pointer;
+  padding-left: 11px;
+}
+
+.search-img {
+  width: 1.25em;
+}
+
+.search-btn {
+  z-index: 3;
+  background-color: #f9fafb;
+  padding: 9px 11px;
+  border: 1px solid #d1d5d8;
+  border-radius: 0px 6px 6px 0;
+}
+
+.no-data {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 20px;
+  color: #dfdddd;
+  min-height: 65vh;
+  display: flex;
+  gap: 0.5em;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-list h1 {
+  font-size: 1.125rem;
+}
+
+.list-add {
+  display: flex;
+  gap: 7px;
+  color: #363636;
+  font-size: 0.875rem;
+}
+
+.data-grid {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  grid-template-areas:
+    "img details"
+    "img plot";
+  gap: 1em;
+  margin-block: 1.375em;
+}
+
+.data-img {
+  grid-area: img;
+}
+
+.data-details {
+  grid-area: details;
+}
+
+.movie-plot {
+  grid-area: plot;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.movie-title,
+.movie-rating,
+.movie-details,
+.add-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.125rem;
+  margin-right: 0.5em;
+  padding-block: 0.5em;
+}
+
+.movie-rating {
+  gap: 0.25em;
+  justify-self: center;
+  font-size: 0.75rem;
+}
+
+.movie-details {
+  font-size: 0.75rem;
+  gap: 1em;
+  padding-block: 0.68em;
+}
+
+.add-wrapper {
+  margin: 0 auto;
+}
+
+.add-icon {
+  width: 1rem;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+/**********
+Media Query  
+**********/
+@media (max-width: 25em) {
+  .data-grid {
+    grid-template-areas:
+      "img details"
+      "plot plot";
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .movie-title,
+  .movie-details {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .add-wrapper {
+    margin: 0;
+  }
+}
