@@ -15,10 +15,11 @@ document.addEventListener('click', (e) => {
           fetch(`http://www.omdbapi.com/?apikey=8b0ff547&t=${movie.Title}`)
             .then(res => res.json())
             .then(data => {
-              html += getMovieHtml(data)
-              renderHome(html)
+              if (!data.Error) {
+                html += getMovieHtml(data)
+                renderHome(html)
+              }
             })
-            .catch(err => console.log(err))
         })
       })
       .catch(err => console.log(err))
@@ -29,14 +30,16 @@ document.addEventListener('click', (e) => {
   if (e.target.dataset.remove) { }
 })
 
+
 function renderHome(html) {
   if (movieWrapper) {
     movieWrapper.innerHTML = html
   }
 }
 
+
 function getMovieHtml(data) {
-  const { Title, Poster, Rated, Runtime, Genre, Plot } = data
+  const { Title, Poster, imdbRating, Runtime, Genre, Plot } = data
 
   return `
   <div class="data-grid">
@@ -50,7 +53,7 @@ function getMovieHtml(data) {
 
         <div class="movie-rating">
           <img src="/images/star.png" alt="a star image to show rating" class="rating-img">
-          <p class="rating">${Rated}</p>
+          <p class="rating">${imdbRating}</p>
         </div>
       </div>
 

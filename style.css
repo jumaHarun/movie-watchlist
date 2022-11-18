@@ -245,7 +245,6 @@ label {
   color: #6b7280;
 }
 
-.movie-title,
 .movie-rating,
 .movie-details,
 .add-wrapper {
@@ -261,8 +260,8 @@ label {
 
 .movie-rating {
   gap: 0.25em;
-  justify-self: center;
-  font-size: 0.75rem;
+  line-height: 1;
+  font-size: .75rem;
 }
 
 .movie-details {
@@ -272,7 +271,7 @@ label {
 }
 
 .add-wrapper {
-  margin: 0 auto;
+  margin-left: auto;
 }
 
 .add-icon {
@@ -292,7 +291,6 @@ Media Query
     grid-template-columns: 1fr 1fr;
   }
 
-  .movie-title,
   .movie-details {
     flex-direction: column;
     align-items: start;
