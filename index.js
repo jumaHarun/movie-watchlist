@@ -1,169 +1,75 @@
-const searchInput = document.getElementById('search')
-const searchBtn = document.getElementById('search-btn')
-const addBtn = document.getElementById('addBtn')
-const removeBtn = document.getElementById('rmBtn')
 const movieWrapper = document.getElementById('movieWrapper')
 const watchlistEl = document.getElementById('watchlistWrapper')
+const searchInput = document.getElementById('search')
 
-const watchlist = [
-  {
-    title: 'Blade Runner',
-    poster: '/images/blade-runner.png',
-    ratings: 8.1,
-    duration: '117 min',
-    genre: 'Action, Drama, Sci-fi',
-    plot: 'A blade runner must pursue and terminate four replicants who stole a ship in space, and have returned to Earth to find their creator.'
+let watchlist = []
+
+document.addEventListener('click', (e) => {
+  if (e.target.dataset.search) {
+    const query = searchInput.value
+    let html = ''
+    fetch(`http://www.omdbapi.com/?apikey=8b0ff547&s=${query}`)
+      .then(res => res.json())
+      .then(data => {
+        data.Search.map(movie => {
+          fetch(`http://www.omdbapi.com/?apikey=8b0ff547&t=${movie.Title}`)
+            .then(res => res.json())
+            .then(data => {
+              html += getMovieHtml(data)
+              renderHome(html)
+            })
+            .catch(err => console.log(err))
+        })
+      })
+      .catch(err => console.log(err))
   }
-]
 
-const movies = [
-  {
-    title: 'Blade Runner',
-    poster: '/images/blade-runner.png',
-    ratings: 8.1,
-    duration: '117 min',
-    genre: 'Action, Drama, Sci-fi',
-    plot: 'A blade runner must pursue and terminate four replicants who stole a ship in space, and have returned to Earth to find their creator.'
-  },
-  {
-    title: 'Blade Runner',
-    poster: '/images/blade-runner.png',
-    ratings: 8.1,
-    duration: '117 min',
-    genre: 'Action, Drama, Sci-fi',
-    plot: 'A blade runner must pursue and terminate four replicants who stole a ship in space, and have returned to Earth to find their creator.'
-  },
-  {
-    title: 'Blade Runner',
-    poster: '/images/blade-runner.png',
-    ratings: 8.1,
-    duration: '117 min',
-    genre: 'Action, Drama, Sci-fi',
-    plot: 'A blade runner must pursue and terminate four replicants who stole a ship in space, and have returned to Earth to find their creator.'
+  if (e.target.dataset.add) { }
+
+  if (e.target.dataset.remove) { }
+})
+
+function renderHome(html) {
+  if (movieWrapper) {
+    movieWrapper.innerHTML = html
   }
-]
-
-function handleAddBtnClick() { }
-
-function handleRemoveBtnClick() { }
-
-function handleSearchBtnClick() { }
-
-
-
-
+}
 
 function getMovieHtml(data) {
-  let html = ''
-  data.forEach(movie => {
-    const { title, poster, ratings, duration, genre, plot } = movie
-    html += `
+  const { Title, Poster, Rated, Runtime, Genre, Plot } = data
+
+  return `
   <div class="data-grid">
     <div class="data-img">
-      <img src="${poster}" alt="#">
+      <img src="${Poster}" alt="a poster for the movie called ${Title}">
     </div>
     
     <div class="data-details">
       <div class="movie-title">
-        <h3 class="title">${title}</h3>
+        <h3 class="title">${Title}</h3>
 
         <div class="movie-rating">
-          <img src="/images/star.png" alt="#" class="rating-img">
-          <p class="rating">${ratings}</p>
+          <img src="/images/star.png" alt="a star image to show rating" class="rating-img">
+          <p class="rating">${Rated}</p>
         </div>
       </div>
 
       <div class="movie-details">
-        <p class="duration">${duration}</p>
-        <p class="genre">${genre}</p>
+        <p class="duration">${Runtime}</p>
+        <p class="genre">${Genre}</p>
         <div class="add-wrapper">
           <img src="/images/add-icon.png" alt="add icon" class="add-icon" id="addBtn">
           <p>Watchlist</p>
         </div>
       </div>
-
     </div>
+
     <div class="movie-plot">
-    <p>
-      ${plot}
-    </p>
+      <p>
+        ${Plot}
+      </p>
     </div>
   </div>
   <hr>
   `
-  })
-
-  return html
 }
-
-function getWatchlistHtml(data) {
-  let html = ''
-  data.forEach(movie => {
-    const { title, poster, ratings, duration, genre, plot } = movie
-    html += `
-  <div class="data-grid">
-    <div class="data-img">
-      <img src="${poster}" alt="#">
-    </div>
-    
-    <div class="data-details">
-      <div class="movie-title">
-        <h3 class="title">${title}</h3>
-
-        <div class="movie-rating">
-          <img src="/images/star.png" alt="#" class="rating-img">
-          <p class="rating">${ratings}</p>
-        </div>
-      </div>
-
-      <div class="movie-details">
-        <p class="duration">${duration}</p>
-        <p class="genre">${genre}</p>
-        <div class="add-wrapper">
-          <img src="/images/rm-icon.png" alt="remove icon" class="add-icon" id="rmBtn">
-          <p>Remove</p>
-        </div>
-      </div>
-
-    </div>
-    <div class="movie-plot">
-    <p>
-      ${plot}
-    </p>
-    </div>
-  </div>
-  <hr>
-  `
-  })
-
-  return html
-}
-
-function renderHome(data) {
-  movieWrapper.innerHTML = getMovieHtml(data)
-}
-
-function renderWatchlist(data) {
-  watchlistEl.innerHTML = getWatchlistHtml(data)
-}
-
-if (movieWrapper) {
-  renderHome(movies)
-}
-
-if (watchlistEl) {
-  renderWatchlist(watchlist)
-}
-
-/*
-http://www.omdbapi.com/?apikey=8b0ff547&
-http://img.omdbapi.com/?apikey=8b0ff547&
-
-Make two API calls one for search array and next for individual movie data
-
-async function apiCall(movie) {
-  const res = await fetch(`http://www.omdbapi.com/?apikey=8b0ff547&s=${movie}`)
-  const data = await res.json()
-  console.log(data.Search)
-}
- */
