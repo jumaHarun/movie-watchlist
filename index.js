@@ -8,11 +8,11 @@ document.addEventListener('click', (e) => {
   if (e.target.dataset.search) {
     const query = searchInput.value
     let html = ''
-    fetch(`http://www.omdbapi.com/?apikey=8b0ff547&s=${query}`)
+    fetch(`https://www.omdbapi.com/?apikey=8b0ff547&s=${query}`)
       .then(res => res.json())
       .then(data => {
         data.Search.map(movie => {
-          fetch(`http://www.omdbapi.com/?apikey=8b0ff547&t=${movie.Title}`)
+          fetch(`https://www.omdbapi.com/?apikey=8b0ff547&t=${movie.Title}`)
             .then(res => res.json())
             .then(data => {
               if (!data.Error) {
