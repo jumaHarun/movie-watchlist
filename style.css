@@ -258,6 +258,16 @@ label {
   padding-block: 0.5em;
 }
 
+.year {
+  font-size: .75rem;
+  color: lawngreen;
+}
+
+.type {
+  color: #363636;
+  margin-left: 2em;
+}
+
 .movie-rating {
   gap: 0.25em;
   line-height: 1;
