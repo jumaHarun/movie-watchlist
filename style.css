@@ -290,6 +290,19 @@ label {
   cursor: pointer;
 }
 
+.prompt {
+  background-color: magenta;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background-color: #FFF;
+  font-size: 1.2rem;
+  font-style: italic;
+  padding: .3em .5em;
+  border-radius: 5px;
+  display: none;
+}
+
 /**********
 Media Query  
 **********/
