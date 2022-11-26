@@ -30,7 +30,7 @@ function render() {
     } else {
       watchlistEl.innerHTML = `
       <div class="no-data no-list">
-        <h1>Your watchlist is looking a little empty...</h1>
+        <h3 id="watchlist-title">Your watchlist is looking a little empty...</h3>
         <div class="list-add">
           <img src="/images/add-icon.png" alt="add icon" id="addBtnList">
           <p>Let's add some movies!</p>

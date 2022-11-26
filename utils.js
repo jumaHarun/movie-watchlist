@@ -1,4 +1,4 @@
-﻿function getMoviesHtml(moviesArray, flag) {
+﻿const getMoviesHtml = (moviesArray, flag) => {
   let html = "";
 
   moviesArray.map((movie) => {
@@ -49,22 +49,25 @@
   });
 
   return html;
-}
+};
 
-function savePrompt(obj, n) {
+const promptUser = (obj, str) => {
   const prompt = document.getElementById("prompt");
   prompt.style.display = "block";
   prompt.textContent =
-    n === 1
+    str === "save"
       ? `${obj.Title} saved to watchlist 🚀`
+      : str === "empty" && obj === null
+      ? `Please enter a movie title in the search bar!! 😅`
       : `${obj.Title} is already in your watchlist 👏🏻`;
+
   setTimeout(() => {
     prompt.style.display = "none";
     prompt.textContent = "";
   }, 1500);
-}
+};
 
-function saveToWatchlist(obj) {
+const saveToWatchlist = (obj) => {
   let watchlist = [];
 
   if (localStorage.getItem("localWatchlist")) {
@@ -75,15 +78,15 @@ function saveToWatchlist(obj) {
     if (!found) {
       watchlist.push(obj);
       localStorage.setItem("localWatchlist", JSON.stringify(watchlist));
-      savePrompt(obj, 1);
+      promptUser(obj, "save");
     } else {
-      savePrompt(obj, 2);
+      promptUser(obj);
     }
   } else {
     watchlist.push(obj);
     localStorage.setItem("localWatchlist", JSON.stringify(watchlist));
-    savePrompt(obj, 1);
+    promptUser(obj, "save");
   }
-}
+};
 
-export { getMoviesHtml, saveToWatchlist };
+export { getMoviesHtml, saveToWatchlist, promptUser };

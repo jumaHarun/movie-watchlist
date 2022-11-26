@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap");
+
 /***********
 CSS RESET
 ***********/
@@ -76,6 +78,7 @@ select {
 /* Set core body defaults */
 body {
   min-height: 100vh;
+  font-family: "Inter", sans-serif;
 }
 
 button {
@@ -89,7 +92,6 @@ Typography
   font-size: 2.7rem;
   font-weight: 800;
   line-height: 24px;
-  letter-spacing: -0.045em;
 }
 
 #item-2 {
@@ -103,7 +105,7 @@ Layout
 **********/
 header {
   position: relative;
-  min-height: 35vh;
+  min-height: 30vh;
   display: flex;
   align-items: center;
   background-color: hsla(0, 0%, 5%, 1);
@@ -134,7 +136,7 @@ nav a {
   background-image: url("/images/header-bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: 25% 20%;
+  background-position: center 25%;
   position: absolute;
   top: 0;
   right: 0;
@@ -198,24 +200,25 @@ label {
 }
 
 .no-data {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   font-size: 1.125rem;
   font-weight: 700;
-  line-height: 20px;
   color: #dfdddd;
-  min-height: 65vh;
+  text-align: center;
   display: flex;
-  gap: 0.5em;
   flex-direction: column;
+  gap: 0.5em;
   align-items: center;
   justify-content: center;
 }
 
-.no-list h1 {
-  font-size: 1.125rem;
-}
-
 .list-add {
   display: flex;
+  align-items: center;
   gap: 7px;
   color: #363636;
   font-size: 0.875rem;
@@ -254,12 +257,13 @@ label {
 
 .title {
   font-size: 1.125rem;
+  font-weight: 500;
   margin-right: 0.5em;
   padding-block: 0.5em;
 }
 
 .year {
-  font-size: .75rem;
+  font-size: 0.75rem;
   color: lawngreen;
 }
 
@@ -271,7 +275,7 @@ label {
 .movie-rating {
   gap: 0.25em;
   line-height: 1;
-  font-size: .75rem;
+  font-size: 0.75rem;
 }
 
 .movie-details {
@@ -291,22 +295,50 @@ label {
 }
 
 .prompt {
-  background-color: magenta;
   position: fixed;
   bottom: 0;
   right: 0;
-  background-color: #FFF;
-  font-size: 1.2rem;
+  background-color: #fff;
   font-style: italic;
-  padding: .3em .5em;
+  padding: 0.3em 0.5em;
   border-radius: 5px;
   display: none;
 }
 
+.watchlist-wrapper,
+.movie-wrapper {
+  position: relative;
+  min-height: 65vh;
+}
+
+#watchlist-title {
+  font-size: 1.125rem;
+}
+
+.preloader-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.preloader {
+  border-radius: 50%;
+}
+
 /**********
-Media Query  
+Media Query
 **********/
-@media (max-width: 25em) {
+@media (max-width: 30em) {
+  nav ul {
+    flex-direction: column;
+    align-items: start;
+  }
+
   .data-grid {
     grid-template-areas:
       "img details"
