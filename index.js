@@ -1,4 +1,9 @@
-import { getMoviesHtml, saveToWatchlist, promptUser } from "./utils.js";
+import {
+  getMoviesHtml,
+  saveToWatchlist,
+  promptUser,
+  removeDuplicates,
+} from "./utils.js";
 
 const searchInput = document.getElementById("search");
 const apiKey = "8b0ff547";
@@ -25,6 +30,7 @@ document.addEventListener("click", (e) => {
 async function handleSearchBtnClick() {
   try {
     const moviesArray = await getMoviesAPI(searchInput.value);
+    searchResults = moviesArray;
     const html = getMoviesHtml(moviesArray, 0);
 
     render(html);
@@ -46,7 +52,7 @@ function handleAddBtnClick(title) {
 
 async function getMoviesAPI(title) {
   try {
-    const moviesArray = [];
+    let moviesArray = [];
     const responseOne = await fetch(
       `https://www.omdbapi.com/?apikey=${apiKey}&s=${title}`
     );
@@ -61,7 +67,7 @@ async function getMoviesAPI(title) {
         moviesArray.push(dataTwo);
       }
     }
-    searchResults = moviesArray;
+    moviesArray = removeDuplicates(moviesArray);
     return moviesArray;
   } catch (err) {
     console.log(err);

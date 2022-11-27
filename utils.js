@@ -89,4 +89,18 @@ const saveToWatchlist = (obj) => {
   }
 };
 
-export { getMoviesHtml, saveToWatchlist, promptUser };
+const removeDuplicates = (arr) => {
+  return arr.reduce((unique, o) => {
+    if (
+      !unique.some(
+        (obj) =>
+          obj.Title === o.Title && obj.Plot === o.Plot && obj.Type === o.Type
+      )
+    ) {
+      unique.push(o);
+    }
+    return unique;
+  }, []);
+};
+
+export { getMoviesHtml, saveToWatchlist, promptUser, removeDuplicates };
